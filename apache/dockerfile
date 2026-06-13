@@ -1,2 +1,13 @@
 FROM httpd:2.4
+
+
 COPY httpd.conf /usr/local/apache2/conf/httpd.conf
+
+
+
+RUN sed -i \
+    -e 's/#LoadModule proxy_module/LoadModule proxy_module/' \
+    -e 's/#LoadModule proxy_balancer_module/LoadModule proxy_balancer_module/' \
+    -e 's/#LoadModule proxy_http_module/LoadModule proxy_http_module/' \
+    -e 's/#LoadModule lbmethod_byrequests_module/LoadModule lbmethod_byrequests_module/' \
+    /usr/local/apache2/conf/httpd.conf
